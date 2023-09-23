@@ -3,7 +3,6 @@ package ru.job4j.quartz;
 import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
 
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.Properties;
@@ -17,7 +16,7 @@ public class AlertRabbit {
 
     public static void initProperties() {
 
-        try (InputStream in = new FileInputStream("rabbit.properties")) {
+        try (InputStream in = AlertRabbit.class.getClassLoader().getResourceAsStream("rabbit.properties")) {
             configTimeScheduler.load(in);
         } catch (IOException e) {
             e.printStackTrace();
