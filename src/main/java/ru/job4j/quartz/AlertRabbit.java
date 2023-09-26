@@ -55,7 +55,7 @@ public class AlertRabbit {
         }
     }
 
-    public static void InsertTable(String tableName) throws SQLException {
+    public static void insertTable(String tableName) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement(
                 "INSERT INTO " + tableName + " (created_date) values(?); ");
         preparedStatement.setTimestamp(1, Timestamp.valueOf(LocalDateTime.now().withNano(0)));
@@ -107,7 +107,7 @@ public class AlertRabbit {
             store.add(System.currentTimeMillis());
             try {
                 createTable("rabbit");
-                InsertTable("rabbit");
+                insertTable("rabbit");
             } catch (SQLException e) {
                 e.printStackTrace();
             }
