@@ -20,7 +20,7 @@ public class AlertRabbit {
     static Properties configTimeScheduler = new Properties();
     static Connection connection;
 
-    public static void initProperties() {
+    private static void initProperties() {
 
         try (InputStream in = AlertRabbit1.class.getClassLoader().getResourceAsStream("rabbit.properties")) {
             configTimeScheduler.load(in);
@@ -29,7 +29,7 @@ public class AlertRabbit {
         }
     }
 
-    public static void initConnection() {
+    private static void initConnection() {
         try {
             initProperties();
             connection = DriverManager.getConnection(
@@ -42,7 +42,7 @@ public class AlertRabbit {
         }
     }
 
-    public static void createTable(String tableName) {
+    private static void createTable(String tableName) {
         try (PreparedStatement preparedStatement = connection.prepareStatement(
                 "CREATE TABLE IF NOT EXISTS " + tableName + " ("
                         + "id serial primary key,"
@@ -55,7 +55,7 @@ public class AlertRabbit {
         }
     }
 
-    public static void insertTable(String tableName) throws SQLException {
+    private static void insertTable(String tableName) throws SQLException {
         PreparedStatement preparedStatement = connection.prepareStatement(
                 "INSERT INTO " + tableName + " (created_date) values(?); ");
         preparedStatement.setTimestamp(1, Timestamp.valueOf(LocalDateTime.now().withNano(0)));
@@ -77,7 +77,7 @@ public class AlertRabbit {
                     .usingJobData(data)
                     .build();
             SimpleScheduleBuilder times = simpleSchedule()
-                    .withIntervalInSeconds(5)
+                    .withIntervalInSeconds(Integer.parseInt(configTimeScheduler.getProperty("rabbit.interval")))
                     .repeatForever();
             Trigger trigger = newTrigger()
                     .startNow()
