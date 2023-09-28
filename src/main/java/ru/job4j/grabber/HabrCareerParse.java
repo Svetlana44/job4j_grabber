@@ -25,10 +25,8 @@ public class HabrCareerParse {
             String link = String.format("%s%s", SOURCE_LINK, linkElement.attr("href"));
             System.out.printf("%s %s%n", vacancyName, link);
 
-
             Element date = row.select(".vacancy-card__date").first();
             String linkdate = date.child(0).attr("datetime");
-
 
             /*           System.out.println(date);  */
             System.out.println("Значение атрибута datetime: " + linkdate
