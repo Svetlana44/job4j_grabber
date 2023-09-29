@@ -11,8 +11,7 @@ class HabrCareerDateTimeParserTest {
     @Test
     void parseDateTimeImpl() {
         String date = "2023-09-29T19:27:14+03:00";
-        DateTimeFormatter formatter = DateTimeFormatter.ISO_LOCAL_DATE_TIME;
-        LocalDateTime expected = LocalDateTime.parse("2023-09-29T19:27:14", formatter);
+        LocalDateTime expected = LocalDateTime.parse("2023-09-29T19:27:14", DateTimeFormatter.ISO_LOCAL_DATE_TIME);
         HabrCareerDateTimeParser habr = new HabrCareerDateTimeParser();
         LocalDateTime actual = habr.parse(date);
         Assertions.assertThat(actual).isEqualTo(expected);
