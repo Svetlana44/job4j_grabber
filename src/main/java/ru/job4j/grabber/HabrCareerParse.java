@@ -5,6 +5,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
+import ru.job4j.grabber.utils.HabrCareerDateTimeParser;
 
 import java.io.IOException;
 
@@ -28,8 +29,12 @@ public class HabrCareerParse {
             Element date = row.select(".vacancy-card__date").first();
             String linkdate = date.child(0).attr("datetime");
 
+            HabrCareerDateTimeParser habr = new HabrCareerDateTimeParser();
+
             /*           System.out.println(date);  */
             System.out.println("Значение атрибута datetime: " + linkdate
+                    + System.lineSeparator()
+                    + habr.parse(linkdate)
                     + System.lineSeparator()
                     + "_____________________________________________________");
         });
