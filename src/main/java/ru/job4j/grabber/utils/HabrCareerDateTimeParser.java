@@ -8,12 +8,11 @@ public class HabrCareerDateTimeParser implements DateTimeParser {
     /* Реализовать метод, преобразующий дату из формата career.habr.com, к виду "yyyy-mm-ddТhh:mm:ss" */
     @Override
     public LocalDateTime parse(String parse) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssXXX");
         if (parse.isEmpty()) {
             return LocalDateTime.now().withNano(0);
         }
-        String subStr = parse.substring(0, 19);
 
-        return LocalDateTime.parse(subStr, formatter);
+        return LocalDateTime.parse(parse, formatter);
     }
 }
