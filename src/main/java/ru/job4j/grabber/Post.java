@@ -13,7 +13,7 @@ import java.util.Objects;
 public class Post {
     int id;
     String title;
-    String link;
+    String link = "https://career.habr.com/vacancies/";
     String description;
     LocalDateTime created;
 
