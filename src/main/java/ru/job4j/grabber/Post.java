@@ -13,7 +13,7 @@ import java.util.Objects;
 public class Post {
     int id;
     String title;
-    String link = "https://career.habr.com/vacancies/";
+    String link;
     String description;
     LocalDateTime created;
 
@@ -26,12 +26,12 @@ public class Post {
             return false;
         }
         Post post = (Post) o;
-        return id == post.id;
+        return id == post.id && Objects.equals(link, post.link);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id);
+        return Objects.hash(id, link);
     }
 
     @Override
