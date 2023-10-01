@@ -21,7 +21,6 @@ public class HabrCareerParse implements Parse {
 
     private final DateTimeParser dateTimeParser;
 
-    private Post post = new Post(1, "title", "link", "description", LocalDateTime.now().withNano(0));
     public static List<Post> posts = new ArrayList<>();
 
     public HabrCareerParse(DateTimeParser dateTimeParser) {
@@ -50,23 +49,25 @@ public class HabrCareerParse implements Parse {
         Document document = connection.get();
         Elements rows = document.select(".vacancy-card__inner");
         rows.forEach(row -> {
+            Post post = new Post(1, "title", "link", "description", LocalDateTime.now().withNano(0));
+
             Element titleElement = row.select(".vacancy-card__title").first();
             Element linkElement = titleElement.child(0);
             String vacancyName = titleElement.text();
 
-            habrCareerParse.post.title = vacancyName;
+            post.title = vacancyName;
 
             String link = String.format("%s%s", SOURCE_LINK, linkElement.attr("href"));
             links.add(link);
 
-            habrCareerParse.post.link = link;
-            habrCareerParse.post.id = Integer.parseInt(link.substring(link.lastIndexOf("/") + 1));
+            post.link = link;
+            post.id = Integer.parseInt(link.substring(link.lastIndexOf("/") + 1));
 
             System.out.printf("%s %s%n", vacancyName, link);
 
             Element date = row.select(".vacancy-card__date").first();
             String linkdate = date.child(0).attr("datetime");
-            habrCareerParse.post.created = habr.parse(linkdate);
+            post.created = habr.parse(linkdate);
 
             /*           System.out.println(date);  */
             System.out.println("Значение атрибута datetime: " + linkdate
@@ -75,8 +76,8 @@ public class HabrCareerParse implements Parse {
                     + System.lineSeparator()
                     + "_____________________________________________________");
             try {
-                habrCareerParse.post.description = habrCareerParse.retrieveDescription(link);
-                posts.add(habrCareerParse.post);
+                post.description = habrCareerParse.retrieveDescription(link);
+                posts.add(post);
 
             } catch (IOException e) {
                 e.printStackTrace();
