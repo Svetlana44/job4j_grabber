@@ -37,6 +37,16 @@ public class PsqlStore implements Store {
         }
     }
 
+    private Post createPost(ResultSet resultSet) throws SQLException {
+        return new Post(
+                resultSet.getInt(1),
+                resultSet.getString(2),
+                resultSet.getString(3),
+                resultSet.getString(4),
+                resultSet.getTimestamp(5).toLocalDateTime()
+        );
+    }
+
     @Override
     public void save(Post post) {
 /*  Ссылка у вакансии уникальная и в методе save при повторном парсинге  мы будем получать исключения,
@@ -59,13 +69,7 @@ public class PsqlStore implements Store {
         try (PreparedStatement preparedStatement = cnn.prepareStatement("SELECT * FROM post;")) {
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
-                    posts.add(new Post(
-                            resultSet.getInt(1),
-                            resultSet.getString(2),
-                            resultSet.getString(3),
-                            resultSet.getString(4),
-                            resultSet.getTimestamp(5).toLocalDateTime()
-                    ));
+                    posts.add(createPost(resultSet));
                 }
             }
         } catch (SQLException e) {
@@ -81,11 +85,7 @@ public class PsqlStore implements Store {
             preparedStatement.setInt(1, id);
             try (ResultSet resultSet = preparedStatement.executeQuery()) {
                 while (resultSet.next()) {
-                    post.id = resultSet.getInt(1);
-                    post.title = resultSet.getString(2);
-                    post.link = resultSet.getString(3);
-                    post.description = resultSet.getString(4);
-                    post.created = resultSet.getTimestamp(5).toLocalDateTime();
+                    post = createPost(resultSet);
                 }
             }
         } catch (SQLException e) {
