@@ -86,15 +86,15 @@ public class HabrCareerParse implements Parse {
         return links;
     }
 
-    public static void main(String[] args) {
+/*    public static void main(String[] args) {
         HabrCareerParse habrCareerParse = new HabrCareerParse(new HabrCareerDateTimeParser());
         System.out.println(habrCareerParse.list(PAGE_LINK));
-    }
+    } */
 
     @Override
     public List<Post> list(String link) {
 
-        for (int i = 1; i < 6; i++) {
+        for (int i = 1; i < 2; i++) {
             try {
                 pageParse(i);
             } catch (IOException e) {

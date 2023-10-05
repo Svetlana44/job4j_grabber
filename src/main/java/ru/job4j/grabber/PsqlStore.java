@@ -16,17 +16,8 @@ public class PsqlStore implements Store {
     private static final String SOURCE_LINK = "https://career.habr.com";
     private static final String PAGE_LINK = String.format("%s/vacancies/java_developer?page=", SOURCE_LINK);
 
-    public PsqlStore() {
-        init();
-    }
-
-    public PsqlStore(Connection cnn) {
-        this.cnn = cnn;
-    }
-
-    public void init() {
+    public PsqlStore(Properties cfg) {
         try (InputStream inputStream = PsqlStore.class.getClassLoader().getResourceAsStream("rabbit.properties")) {
-            Properties cfg = new Properties();
             cfg.load(inputStream);
             this.cnn = DriverManager.getConnection(
                     cfg.getProperty("url"),
@@ -101,8 +92,8 @@ public class PsqlStore implements Store {
         }
     }
 
-    public static void main(String[] args) {
-        PsqlStore psqlStore = new PsqlStore();
+ /*   public static void main(String[] args) {
+        PsqlStore psqlStore = new PsqlStore(new Properties());
         HabrCareerDateTimeParser habr = new HabrCareerDateTimeParser();
         HabrCareerParse habrCareerParse = new HabrCareerParse(habr);
         List<Post> posts = habrCareerParse.list(PAGE_LINK);
@@ -110,5 +101,5 @@ public class PsqlStore implements Store {
         posts.forEach(psqlStore::save);
         System.out.println(psqlStore.findById(1000130906));
         System.out.println(psqlStore.getAll());
-    }
+    } */
 }
