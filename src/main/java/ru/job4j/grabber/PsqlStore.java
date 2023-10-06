@@ -29,11 +29,12 @@ public class PsqlStore implements Store {
     }
 
     private Post createPost(ResultSet resultSet) throws SQLException {
+        /*поля переставлены местами в БД discription и link*/
         return new Post(
                 resultSet.getInt(1),
                 resultSet.getString(2),
-                resultSet.getString(3),
                 resultSet.getString(4),
+                resultSet.getString(3),
                 resultSet.getTimestamp(5).toLocalDateTime()
         );
     }
