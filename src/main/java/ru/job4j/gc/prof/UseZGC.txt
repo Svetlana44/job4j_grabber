@@ -1,0 +1,61 @@
+Параметр -Xmx24m увеличен вдвое
+-XX:+UseZGC -Xmx24m -Xms12m -Xlog:gc:log.txt
+
+1 для создание массива небольшой всплескт на 5:30.
+2 сортировка пузырьком второй небольшой подъём в 5:30
+3 сортировка  слиянием самый долгий подъём с 5:30 до 5:32
+4 сортировка вставками подъём поменьше в 5:34
+
+
+[0.012s][info][gc] Using The Z Garbage Collector
+[0.169s][info][gc] GC(0) Garbage Collection (Warmup) 4M(17%)->4M(17%)
+[1.149s][info][gc] GC(1) Garbage Collection (Warmup) 6M(25%)->4M(17%)
+[3.148s][info][gc] GC(2) Garbage Collection (Warmup) 12M(50%)->8M(33%)
+[3.255s][info][gc] GC(3) Garbage Collection (Allocation Rate) 16M(67%)->8M(33%)
+[3.466s][info][gc] GC(4) Garbage Collection (Allocation Rate) 10M(42%)->8M(33%)
+[3.568s][info][gc] GC(5) Garbage Collection (Allocation Rate) 10M(42%)->8M(33%)
+[3.651s][info][gc] GC(6) Garbage Collection (Allocation Rate) 8M(33%)->8M(33%)
+[3.754s][info][gc] GC(7) Garbage Collection (Allocation Rate) 8M(33%)->8M(33%)
+[3.865s][info][gc] GC(8) Garbage Collection (Allocation Rate) 8M(33%)->8M(33%)
+[3.958s][info][gc] GC(9) Garbage Collection (Allocation Rate) 8M(33%)->8M(33%)
+[19.857s][info][gc] GC(10) Garbage Collection (Proactive) 12M(50%)->6M(25%)
+[30.968s][info][gc] GC(11) Garbage Collection (Proactive) 10M(42%)->8M(33%)
+[34.454s][info][gc] GC(12) Garbage Collection (Proactive) 12M(50%)->8M(33%)
+[43.148s][info][gc] Allocation Stall (main) 1.317ms
+[43.149s][info][gc] GC(13) Garbage Collection (Allocation Rate) 18M(75%)->20M(83%)
+[43.170s][info][gc] Allocation Stall (main) 14.215ms
+[43.171s][info][gc] GC(14) Garbage Collection (Allocation Stall) 24M(100%)->14M(58%)
+[43.274s][info][gc] GC(15) Garbage Collection (Allocation Rate) 24M(100%)->8M(33%)
+[43.352s][info][gc] GC(16) Garbage Collection (Allocation Rate) 8M(33%)->8M(33%)
+[43.444s][info][gc] GC(17) Garbage Collection (Allocation Rate) 8M(33%)->8M(33%)
+[43.572s][info][gc] GC(18) Garbage Collection (Allocation Rate) 8M(33%)->8M(33%)
+[43.644s][info][gc] GC(19) Garbage Collection (Allocation Rate) 8M(33%)->8M(33%)
+[43.753s][info][gc] GC(20) Garbage Collection (Allocation Rate) 8M(33%)->8M(33%)
+[43.854s][info][gc] GC(21) Garbage Collection (Allocation Rate) 8M(33%)->8M(33%)
+[43.978s][info][gc] GC(22) Garbage Collection (Allocation Rate) 8M(33%)->10M(42%)
+[44.064s][info][gc] GC(23) Garbage Collection (Allocation Rate) 10M(42%)->8M(33%)
+[44.348s][info][gc] GC(24) Garbage Collection (Allocation Rate) 8M(33%)->8M(33%)
+[44.461s][info][gc] GC(25) Garbage Collection (Allocation Rate) 8M(33%)->8M(33%)
+[44.550s][info][gc] GC(26) Garbage Collection (Allocation Rate) 8M(33%)->8M(33%)
+[44.657s][info][gc] GC(27) Garbage Collection (Allocation Rate) 8M(33%)->8M(33%)
+[44.750s][info][gc] GC(28) Garbage Collection (Allocation Rate) 8M(33%)->8M(33%)
+[44.865s][info][gc] GC(29) Garbage Collection (Allocation Rate) 8M(33%)->8M(33%)
+[44.956s][info][gc] GC(30) Garbage Collection (Allocation Rate) 8M(33%)->8M(33%)
+[53.151s][info][gc] GC(31) Garbage Collection (Proactive) 12M(50%)->12M(50%)
+[76.362s][info][gc] GC(32) Garbage Collection (Proactive) 16M(67%)->12M(50%)
+[100.561s][info][gc] GC(33) Garbage Collection (Proactive) 16M(67%)->12M(50%)
+[125.756s][info][gc] GC(34) Garbage Collection (Proactive) 16M(67%)->12M(50%)
+[151.057s][info][gc] GC(35) Garbage Collection (Proactive) 16M(67%)->12M(50%)
+[176.346s][info][gc] GC(36) Garbage Collection (Proactive) 16M(67%)->8M(33%)
+[188.457s][info][gc] GC(37) Garbage Collection (Proactive) 12M(50%)->8M(33%)
+[202.559s][info][gc] GC(38) Garbage Collection (Proactive) 12M(50%)->8M(33%)
+[216.657s][info][gc] GC(39) Garbage Collection (Proactive) 12M(50%)->8M(33%)
+[229.865s][info][gc] GC(40) Garbage Collection (Proactive) 12M(50%)->8M(33%)
+[241.948s][info][gc] GC(41) Garbage Collection (Proactive) 12M(50%)->8M(33%)
+[254.047s][info][gc] GC(42) Garbage Collection (Proactive) 12M(50%)->8M(33%)
+[266.258s][info][gc] GC(43) Garbage Collection (Proactive) 12M(50%)->8M(33%)
+[280.255s][info][gc] GC(44) Garbage Collection (Proactive) 12M(50%)->8M(33%)
+[293.452s][info][gc] GC(45) Garbage Collection (Proactive) 12M(50%)->8M(33%)
+[305.546s][info][gc] GC(46) Garbage Collection (Proactive) 12M(50%)->8M(33%)
+[319.761s][info][gc] GC(47) Garbage Collection (Proactive) 12M(50%)->8M(33%)
+[321.652s][info][gc] GC(48) Garbage Collection (Proactive) 12M(50%)->12M(50%)

@@ -1,0 +1,32 @@
+Запуск приложения с различными сборщиками мусора
+
+Для начала стоит отметить флаг -Xlog:gc*
+(до JDK 9 нужно использовать -XX:-PrintGCDetails) если мы его зададим то, сможем увидеть лог сборщика в консоли
+
+Ключи для запуска:
+
+- Serial => -XX:+UseSerialGC
+
+- Parallel => -XX:+UseParallelGC
+
+- CMS => -XX:+UseConcMarkSweepGC (доступен до JDK 14)
+
+- G1 => -XX:+UseG1GC
+
+- ZGC => -XX:+UseZGC
+__________________________________________
+Если хип 12 мегабайт, значит ориентировочно объем old generation 8 мегабайт,
+ а young generation 4 мегабайта (из них survive занимает 6 часть – 0,66 мегабайт.
+  Значит survive 0 = 0.33 / survive 1 = 0,33, а eden 3.3 мегабайта, соответственно).
+_____________________________________________
+-XX:+UseSerialGC -Xmx12m -Xms12m -Xlog:gc:log.txt
+
+-XX:+UseParallelGC -Xmx12m -Xms12m -Xlog:gc:log.txt
+
+-XX:+UseG1GC -Xmx12m -Xms12m -Xlog:gc:log.txt
+
+-XX:+UseZGC -Xmx12m -Xms12m -Xlog:gc:log.txt
+ergeSort Начало сортировки - 17:21:38.971714100
+Exception in thread "main" java.lang.OutOfMemoryError: Java heap space
+/*увеличить память*/
+-XX:+UseZGC -Xmx24m -Xms12m -Xlog:gc:log.txt
