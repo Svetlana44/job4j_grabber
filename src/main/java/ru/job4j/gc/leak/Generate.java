@@ -15,6 +15,7 @@ public interface Generate {
         try (Stream<String> lines = Files.lines(Paths.get(path))) {
             lines.forEach(text::add);
         } catch (IOException e) {
+            System.out.println("Attantion!");
         }
         return text;
     }
