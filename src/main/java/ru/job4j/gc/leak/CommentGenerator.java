@@ -46,6 +46,7 @@ public class CommentGenerator implements Generate {
                     phrases.get(random.nextInt(phrases.size())),
                     SEPARATOR, phrases.get(random.nextInt(phrases.size())),
                     SEPARATOR, phrases.get(random.nextInt(phrases.size())));
+
             comments.add(new Comment(comment, userGenerator.randomUser()));
         }
     }

@@ -16,10 +16,11 @@ public class Menu {
         CommentGenerator commentGenerator = new CommentGenerator(random, userGenerator);
         Scanner scanner = new Scanner(System.in);
         PostStore postStore = new PostStore();
-        start(commentGenerator, scanner, userGenerator, postStore);
+        Menu menu = new Menu();
+        menu.start(commentGenerator, scanner, userGenerator, postStore);
     }
 
-    private static void start(CommentGenerator commentGenerator, Scanner scanner, UserGenerator userGenerator, PostStore postStore) {
+    private void start(CommentGenerator commentGenerator, Scanner scanner, UserGenerator userGenerator, PostStore postStore) {
         final int ADD_POST = 1;
         final int ADD_MANY_POST = 2;
         final int SHOW_ALL_POSTS = 3;
@@ -51,7 +52,7 @@ public class Menu {
                     createPost(commentGenerator, userGenerator, postStore, text);
                 }
             } else if (SHOW_ALL_POSTS == userChoice) {
-                System.out.println(PostStore.getPosts());
+                System.out.println(postStore.getPosts());
             } else if (DELETE_POST == userChoice) {
                 /*           System.out.println(ID_FOR_DELETE);   */
                 postStore.removeAll();

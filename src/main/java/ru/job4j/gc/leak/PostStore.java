@@ -7,7 +7,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 /* Хранилище постов.*/
 public class PostStore {
-    private static Map<Integer, Post> posts = new HashMap<>();
+    private Map<Integer, Post> posts = new HashMap<>();
     private AtomicInteger atomicInteger = new AtomicInteger(1);
 
     public Post add(Post post) {
@@ -21,7 +21,7 @@ public class PostStore {
         posts.clear();
     }
 
-    public static Collection<Post> getPosts() {
+    public Collection<Post> getPosts() {
         return posts.values();
     }
 }
