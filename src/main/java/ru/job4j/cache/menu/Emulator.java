@@ -2,32 +2,75 @@ package ru.job4j.cache.menu;
 
 import ru.job4j.cache.DirFileCache;
 
-import java.io.File;
-import java.lang.ref.SoftReference;
-import java.nio.file.Path;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Scanner;
 
 public class Emulator {
-    public static void main(String[] args) {
-        DirFileCache dirFileCache = new DirFileCache("C:\\projects\\job4j_grabber\\src\\main\\java\\ru\\job4j\\cache\\menu");
-        List<Path> paths = new ArrayList<>();
-        /* Создаем объект File для указанной директории  */
-        File directory = new File(dirFileCache.getCachingDir());
 
-        /* Получаем список всех txt файлов в директории  */
-        File[] files = directory.listFiles(f -> f.getName().endsWith("txt"));
+    public static void printMenu() {
+        System.out.println("________________________"
+                + "Выберите пункт меню_______________________"
+                + System.lineSeparator()
+                + "1 - указать кэшируемую директорию"
+                + System.lineSeparator()
+                + "2 - загрузить содержимое файла в кэш"
+                + System.lineSeparator()
+                + "3 - получить содержимое файла из кэша"
+                + System.lineSeparator()
+                + "для завершения работы введите Exit.");
 
-        /* Проверяем, что список файлов не пустой  */
-        if (files != null) {
-            /* Перебираем все файлы и добавляем имена в список  */
-            for (File file : files) {
-                if (file.isFile()) {
-                    SoftReference<String> softReference = new SoftReference(dirFileCache.load(file.getAbsolutePath()));
-                    dirFileCache.put(file.getAbsolutePath(), softReference);
-                    System.out.println(softReference.get());
+    }
+
+    public static void showMenu() {
+        /*        DirFileCache dirFileCache = new DirFileCache("C:\\projects\\job4j_grabber\\src\\main\\java\\ru\\job4j\\cache\\menu");  */
+        String cachingDir = "";
+        DirFileCache dirFileCache = new DirFileCache(cachingDir);
+        try (Scanner scanner = new Scanner(System.in)) {
+            printMenu();
+            while (true) {
+                if (scanner.hasNext()) {
+                    String str = scanner.next();
+                    if ("1".equals(str)) {
+                        System.out.println("Input Dir name: ");
+                        if (scanner.hasNext()) {
+                            cachingDir = scanner.next();
+                            if (!(cachingDir.isEmpty())) {
+                                dirFileCache.putFilesToCach(cachingDir);
+                            }
+                        }
+                        printMenu();
+                    }
+                    if ("3".equals(str)) {
+                        System.out.println("Input file name: ");
+                        /* C:\projects\job4j_grabber\src\main\java\ru\job4j\cache\menu\names.txt */
+                        if (scanner.hasNext()) {
+                            cachingDir = scanner.next();
+                            if (!(cachingDir.isEmpty())) {
+                                dirFileCache.getFilesFromCach(cachingDir);
+                            }
+                        }
+                        printMenu();
+                    }
+                    /*  положить содержимое файла в кэш  */
+                    if ("2".equals(str)) {
+                        System.out.println("Input file name: ");
+                        if (scanner.hasNext()) {
+                            cachingDir = scanner.next();
+                            if (!(cachingDir.isEmpty())) {
+                                dirFileCache.putFilesToCach(cachingDir);
+                            }
+                        }
+                        printMenu();
+                    }
+                    if ("Exit".equals(str)) {
+                        return;
+                    }
                 }
             }
         }
+
+    }
+
+    public static void main(String[] args) {
+        showMenu();
     }
 }
